@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <title>Vue Directive</title>
+</head>
+<body>
+  <div id="app">
+    <div class="container py-5">
+      <div class="jumbotron">
+        <h1 class="text-center">{{ titleApp }}</h1>
+      </div>
+      <!-- LIST NINJAS -->
+      <div class="container">
+        <div class="row">
+          <div class="card text-center col-4" style="width: 18rem;" v-for="todo in todos">
+            <img :src="todo.image" class="card-img-top" :alt="todo.name">
+            <div class="card-body">
+              <h5 class="card-title">{{ todo.title }}</h5>
+              <p class="card-text">{{ todo.created }}</p>
+              <a href="#" class="btn btn-success" @click.prevent="updateTodo(todo.id)" v-if="!todo.check">check</a>
+              <a href="#" class="btn btn-warning" @click.prevent="updateTodo(todo.id)" v-else>uncheck</a>
+              <a href="#" class="btn btn-danger" v-on:click.prevent="deleteTodo(todo.id)">delete</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- QUESTION ANSWER -->
+      <div class="container pt-4">
+        <div class="row">
+          <div class="col-6">
+            <div class="text-center">
+              <h1>--- yesnoAPI ---</h1>
+              <label for="question">New Ninja? Type here: </label>
+              <input type="text" v-model="question">
+            </div>
+            <div class="jumbotron">
+              <div class="text-center">
+                <img :src="gif" class="img-fluid" alt="newNinja?" style="max-width:200px">
+                <h1>{{ answer }}</h1>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <h1 class="text-center">Form Input</h1>
+            <form method="post" class="col border p-4" v-on:submit.prevent="createNewData">
+              <div class="form-group">
+                <label for="title">Title</label>
+                <input
+                  v-model="newTodo.title"
+                  type="text"
+                  name="title"
+                  autocomplete="off"
+                  class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="image">Image</label>
+                <input
+                  v-model="newTodo.image"
+                  type="text"
+                  name="image"
+                  autocomplete="off"
+                  class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="name">Created</label>
+                <input
+                  v-model="newTodo.created"
+                  type="text"
+                  name="name"
+                  autocomplete="off"
+                  class="form-control">
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORM NEW NINJA -->
+      <div class="container pt-4">
+        <div class="row">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="./javascript/vue.js"></script>
+</body>
+</html>
